@@ -18,18 +18,16 @@ public class TestQueue{
       return;
     }
     this.rear.next = temp;
-    this.rear = temp;
+    this.rear = this.rear.next;
   }
 
   Node dequeue() {
     if(this.front == null) {
+      this.rear = null
       return null;
     }
     Node temp = this.front;
     this.front = this.front.next;
-    if(this.front == null) {
-      this.rear = null;
-    }
     return temp;
   }
   public TestQueue() {
@@ -41,8 +39,14 @@ public class TestQueue{
     TestQueue newQ = new TestQueue();
     newQ.enqueue(5);
     newQ.enqueue(6);
-    newQ.dequeue();
     System.out.println(newQ.dequeue().data);
+    newQ.enqueue(7);
+    newQ.enqueue(8);
+    newQ.enqueue(9);
+    System.out.println(newQ.dequeue().data);
+    System.out.println(newQ.dequeue().data);
+
+
   }
 
 }
