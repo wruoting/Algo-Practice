@@ -1,9 +1,7 @@
 import math
-
-
 def max_heapify(A, i):
-    left = 2*(i+1)-1
-    right = 2*(i+1)
+    left = (i+1)*2 - 1
+    right = (i+1)*2
     largest = i
     if left < len(A) and A[left] > A[i]:
         largest = left
@@ -28,9 +26,22 @@ def build_heap(A):
         max_heapify(A, i)
     return A
 
-
+def swim_up(i, A):
+    if i>0 and A[i] > A[int(math.floor((i-1)/2))]:
+        # swap i and i/2
+        temp = A[i]
+        A[i] = A[int(math.floor((i-1)/2))]
+        A[int(math.floor((i-1)/2))] = temp
+        return swim_up(int(math.floor((i-1)/2)), A)
+    return A
+    
 A = [9, 3, 16, 1, 2, 8, 9]
-A = [6, 8, 12, 7,  5, 8, 10, 12, 17, 2, 1]
+A = [6, 8, 12, 7, 5, 8, 10, 12, 17, 2, 1]
+# print(build_heap(A))
+# A.pop(0)
 print(build_heap(A))
-A.pop(0)
-print(build_heap(A))
+
+A.append(20)
+print(A)
+swim_up(len(A)-1, A)
+print(A)
